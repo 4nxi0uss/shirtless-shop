@@ -1,0 +1,7 @@
+.Link {
+    @apply mr-3 border-b-4 border-b-transparent
+}
+
+.Link:hover {
+    @apply border-b-sky-300
+}
