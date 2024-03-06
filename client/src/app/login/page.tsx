@@ -3,18 +3,42 @@ import type { MouseEvent } from 'react';
 import Form from '../components/Form';
 import Wrapper from '../components/Wrapper';
 import style from '../styles/MainPage.module.css';
+import Link from 'next/link';
+import { LOGIN_TITLE } from './Login.config';
+import { REGISTER_TITLE } from '../register/Register.config';
 
 export default function Login() {
 	const test = (e: MouseEvent) => {
 		e.preventDefault();
 	};
 
+	const decription = () => {
+		return (
+			<div>
+				<p>
+					If you do not have account, please
+					<Link
+						href='/register'
+						className='text-sky-800 hover:text-sky-500 font-bold'
+					>
+						{' '}
+						{REGISTER_TITLE}
+					</Link>
+				</p>
+			</div>
+		);
+	};
+
 	return (
 		<div className={style.page}>
 			<Wrapper className='mt-32'>
-				<h2 className='text-center'>Login</h2>
-				<Form className='flex flex-col max-w-64 relative left-1/2 -translate-x-1/2'>
-					<label htmlFor='login'>login</label>
+				<h2 className='flex justify-center mb-3'>
+					{LOGIN_TITLE}
+				</h2>
+				<Form className='flex flex-col max-w-[300px] relative left-1/2 -translate-x-1/2'>
+					<label className='mt-3' htmlFor='login'>
+						Email
+					</label>
 					<input
 						className='border border-black'
 						type='text'
@@ -33,10 +57,11 @@ export default function Login() {
 					/>
 					<button
 						onClick={test}
-						className='bg-sky-300 mt-3 hover:bg-sky-500'
+						className='bg-sky-500 mt-3 hover:bg-sky-300'
 					>
-						Login
+						{LOGIN_TITLE}
 					</button>
+					{decription()}
 				</Form>
 			</Wrapper>
 		</div>

@@ -1,6 +1,10 @@
 import Image from 'next/image';
+import type { ReactElement } from 'react';
 
-function HeroBaner() {
+/**
+ * @returns {ReactElement}
+ */
+function HeroBaner(): ReactElement {
 	return (
 		<div className=''>
 			<Image

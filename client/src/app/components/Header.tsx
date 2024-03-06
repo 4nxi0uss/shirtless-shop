@@ -2,8 +2,12 @@ import Image from 'next/image';
 import Link from 'next/link';
 import style from '../styles/Header.module.css';
 import Wrapper from './Wrapper';
+import type { ReactElement } from 'react';
 
-export default function Header() {
+/**
+ * @returns {ReactElement}
+ */
+export default function Header(): ReactElement {
 	return (
 		<header className='h-16 border-b border-b-black'>
 			<Wrapper>
