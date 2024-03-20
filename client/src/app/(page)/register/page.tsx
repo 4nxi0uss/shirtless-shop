@@ -1,23 +1,18 @@
 'use client';
-import { useState, type MouseEvent } from 'react';
-import Form from '../components/Form';
-import Wrapper from '../components/Wrapper';
-import style from '../styles/MainPage.module.css';
+import { useState } from 'react';
+import type { MouseEvent, ReactElement } from 'react';
+import Form from '@/app/components/Form';
+import Wrapper from '@/app/components/Wrapper';
+import style from '@/app/styles/MainPage.module.css';
 import Link from 'next/link';
 import { REGISTER_TITLE } from './Register.config';
-import { LOGIN_TITLE } from '../login/Login.config';
-import { emailValidation, passwordValidation } from '../utils/validation';
 
-type FormDataType = {
-	email: string;
-	password: string;
-	repeatPassword: string;
-	userName: string;
-	surname: string;
-};
+import { emailValidation, passwordValidation } from '@/app/utils/validation';
+import { registerQuery } from '@/app/query/login.query';
+import { LOGIN_TITLE } from '@/app/(page)/login/Login.config';
 
-export default function Register() {
-	const [formData, setFormData] = useState<FormDataType>({
+export default function Register(): ReactElement {
+	const [formData, setFormData] = useState<RegisterFormDataType>({
 		email: '',
 		password: '',
 		repeatPassword: '',
@@ -25,11 +20,21 @@ export default function Register() {
 		surname: '',
 	});
 
-	const OnClickSubmit = (e: MouseEvent) => {
+	/**
+	 * @param {MouseEvent} e
+	 */
+	const OnClickSubmit = async (e: MouseEvent) => {
 		e.preventDefault();
 
-		passwordValidation(formData.password);
-		emailValidation(formData.email);
+		const { email, password, repeatPassword } = formData;
+
+		if (
+			passwordValidation(password) &&
+			emailValidation(email) &&
+			password === repeatPassword
+		) {
+			await registerQuery(formData);
+		}
 	};
 
 	/**
@@ -44,7 +49,10 @@ export default function Register() {
 		});
 	};
 
-	const decription = () => {
+	/**
+	 * @returns {ReactElement}
+	 */
+	const decription = (): ReactElement => {
 		return (
 			<div>
 				<p>
@@ -61,7 +69,10 @@ export default function Register() {
 		);
 	};
 
-	const registerInfo = () => {
+	/**
+	 * @returns {ReactElement}
+	 */
+	const registerInfo = (): ReactElement => {
 		return (
 			<div className='flex flex-col items-center relative left-1/2 -translate-x-1/2'>
 				<p>Password needs to have:</p>
