@@ -4,6 +4,8 @@ import dotenv from "dotenv";
 import user from "./routes/User.routes";
 import errorHandler from "./helpers/errorHandler";
 import bodyParser from "body-parser";
+import cookieParser from "cookie-parser";
+import cors from "cors";
 
 dotenv.config();
 
@@ -12,6 +14,15 @@ const port = process.env.PORT;
 
 /** users endpoint */
 app.use(bodyParser.json());
+
+app.use(cookieParser());
+app.use(
+  cors({
+    origin: true,
+    credentials: true,
+  }),
+);
+
 app.use("/users", user);
 
 /** global error handler */

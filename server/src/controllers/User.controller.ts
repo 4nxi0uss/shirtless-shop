@@ -52,7 +52,7 @@ export default class UserController {
   async userRegister(req: Request, res: Response): Promise<void> {
     try {
       const {
-        name = "",
+        userName: name = "",
         surname = "",
         email = "",
         password = "",
