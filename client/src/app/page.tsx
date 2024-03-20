@@ -1,6 +1,6 @@
-import HeroBaner from './components/HeroBaner';
-import Wrapper from './components/Wrapper';
-import style from './styles/MainPage.module.css';
+import HeroBaner from '@/app/components/HeroBaner';
+import Wrapper from '@/app/components/Wrapper';
+import style from '@/app/styles/MainPage.module.css';
 
 export default function Home() {
 	return (
